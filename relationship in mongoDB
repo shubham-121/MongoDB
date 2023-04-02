@@ -1,0 +1,21 @@
+//one to many relationship. For eg-single product with multiple reviews
+ 
+ 
+ 
+db.products.insertOne({
+  name:"rohan",
+  gender:"M",
+  age:21,
+  reviews:[                                                         //using arrays to store multiple data of one field
+    {
+      authorName:"shreyaa", rating:5, gender:"F", section:"C"        //single products with multiple reviews
+      
+    },
+    {
+      authorName:"sarika", rating:3, gender:"F", section:"C"
+    },
+    {
+      authorName:"niharika", rating:4, gender:"F",section:"c"
+    }
+  ]
+})
