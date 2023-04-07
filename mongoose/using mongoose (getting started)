@@ -1,0 +1,70 @@
+const mongoose = require('mongoose');
+
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/test');
+
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
+
+const fruitSchema=new mongoose.Schema({
+  name:String,
+  rating:Number,
+  review:String
+
+})
+
+const Fruit=mongoose.model("Fruit",fruitSchema) //creating a class named fruit with fruitSchema properties
+
+const fruit=new Fruit({
+  name:"apple",
+  rating:7,
+  review:"An apple a day, keeps a doctor away"
+
+})
+
+fruit.save()
+
+const personSchema=new mongoose.Schema({
+  name:String,
+  age:Number
+})
+
+const Person=mongoose.model("Person",personSchema)  //automatically converts Person to people in the database
+
+const person=new Person({
+  name:"Shubham",
+  age:20
+})
+
+person.save()
+
+const kiwi=new Fruit({
+  name:"Kiwi",
+  rating:4,
+  review:"expensive"
+})
+
+const grape=new Fruit({
+  name:"grape",
+  rating:9,
+  review:"sweet and sour"
+})
+
+const banana=new Fruit({
+  name:"banana",
+  rating:4,
+  review:"cheap and healthy"
+})
+
+
+
+
+Fruit.insertMany([kiwi,banana,grape]).then (function() {
+  console.log("No error. Saved sucessfully");
+
+}).catch(function(err){
+  console.log("ther was an error" +err);
+});
+
